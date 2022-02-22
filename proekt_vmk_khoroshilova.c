@@ -14,12 +14,12 @@ enum TYPE { // создание констант для типа массива
 
 long long int * gen_mass (int n, int type) { // генерация массива
     long long int * a = (long long int *) calloc (n, sizeof(long long int)); // выделение памяти под массив
-    if (type == SORTED) { // создание сортированного массива
+    if (type == RE_SORTED) { // создание сортированного массива
         for (int i = 0; i < n; i++){
             a[i] = i;
         }
     }
-    else if (type == RE_SORTED) { // создание сортированного массива в обратном порядке
+    else if (type == SORTED) { // создание сортированного массива в обратном порядке
         for (int i = n - 1; i >= 0; i--){
             a[i] = n - i;
         }
@@ -76,14 +76,14 @@ void q_sort (long long int * x, int n, long int * comp, long int * swap) { // б
             j -= 1;
             *comp += 1;
         }
-        if (i <= j) { // перестановка элементов
+        if (i < j) { // перестановка элементов
             long long int tmp = x[i];
             x[i] = x[j];
             x[j] = tmp;
-            i += 1;
-            j -= 1;
             *swap += 1;
         }
+        i += 1;
+        j -= 1;
     }
 
     if (j > 0) {
@@ -110,7 +110,7 @@ int main (void){
     long int comp_2 = 0; // кол-во сравнений 
     long int swap_2 = 0; // кол-во перестановок
     int n = 10; // длина массива
-    long long int * d = gen_mass(n, RANDOM);
+    long long int * d = gen_mass(n, SORTED);
     long long int * e = copy_of_mass(d, n);
     print_mass(d, n);
     printf ("----------------------------\n");
